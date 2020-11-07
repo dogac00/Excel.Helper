@@ -29,7 +29,9 @@ namespace Excel.Helper
                 throw new ArgumentNullException("List parameter cannot be null.");
             if (string.IsNullOrEmpty(worksheetName))
                 throw new ArgumentException("You must enter worksheet name or use the default worksheet name.");
-                
+            if (typeof(T).IsPrimitive || typeof(T) == typeof(string))
+                throw new ArgumentException("Primitive types/strings are not supported, please use a type that wraps this type.");
+
             using var workbook = new XLWorkbook();
             await using var stream = new MemoryStream();
             
