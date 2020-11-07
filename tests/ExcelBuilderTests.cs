@@ -7,6 +7,11 @@ namespace Excel.Helper.Tests
 {
     public class ExcelBuilderTests
     {
+        private string GetExcelsFolderPath(string fileName)
+        {
+            return $"../../../Excels/{fileName}";
+        }
+        
         [Fact]
         public async Task ShouldBuildExcel_WithPeopleList()
         {
@@ -18,8 +23,9 @@ namespace Excel.Helper.Tests
             };
 
             var file = await ExcelBuilder.BuildExcelFile(people);
+            var path = GetExcelsFolderPath("PeopleExcel.xlsx");
             
-            await File.WriteAllBytesAsync("../../../Excels/SampleFile.xlsx", file);
+            await File.WriteAllBytesAsync(path, file);
         }
         
         [Fact]
@@ -33,10 +39,27 @@ namespace Excel.Helper.Tests
             };
 
             var file = await ExcelBuilder.BuildExcelFile(textList);
-
-            var textWritten = await ExcelReader.ReadExcelFile<string>(file);
             
-            Assert.Equal(textList, textWritten);
+            var path = GetExcelsFolderPath("StringsExcel.xlsx");
+
+            await File.WriteAllBytesAsync(path, file);
+        }
+        
+        [Fact]
+        public async Task ShouldBuildExcel_WithDynamicList()
+        {
+            var textList = new List<dynamic>
+            {
+                new Person {Id = 12345, Name = "Dogac"},
+                "Dogac2",
+                34567
+            };
+
+            var file = await ExcelBuilder.BuildExcelFile(textList);
+            
+            var path = GetExcelsFolderPath("DynamicExcel.xlsx");
+
+            await File.WriteAllBytesAsync(path, file);
         }
     }
 }

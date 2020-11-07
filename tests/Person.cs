@@ -26,5 +26,10 @@ namespace Excel.Helper.Tests
         {
             return HashCode.Combine(Id, Name);
         }
+
+        public override string ToString()
+        {
+            return $"Id = {Id}, Name = {Name}";
+        }
     }
 }

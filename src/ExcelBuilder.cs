@@ -13,17 +13,14 @@ namespace Excel.Helper
     public static class ExcelBuilder
     {
         private static readonly Pluralizer _pluralizer = new Pluralizer();
-        
+
         public static Task<byte[]> BuildExcelFile<T>(IEnumerable<T> list)
         {
-            if (list == null)
-                throw new ArgumentNullException("List parameter cannot be null.");
-            
             var plural = _pluralizer.Pluralize(typeof(T).Name);
-            
+
             return BuildExcelFile(list, plural);
         }
-        
+
         public static async Task<byte[]> BuildExcelFile<T>(IEnumerable<T> list, string worksheetName)
         {
             if (list == null)
@@ -36,13 +33,16 @@ namespace Excel.Helper
 
             DataTable dataTable;
 
-            if (typeof(T).IsPrimitive || typeof(T) == typeof(string))
+            if (typeof(T).IsPrimitive ||
+                typeof(T) == typeof(string))
                 dataTable = CreateDataTable(list.Select(e => new {Value = e}));
+            else if (typeof(T) == typeof(object))
+                dataTable = CreateDataTable(list.Select(e => new {Value = e.ToString()}));
             else
                 dataTable = CreateDataTable(list);
-            
+
             workbook.Worksheets.Add(dataTable, worksheetName);
-            
+
             workbook.SaveAs(stream);
             return stream.ToArray();
         }
@@ -58,7 +58,7 @@ namespace Excel.Helper
                 dt.Columns.Add(property.Name, property.PropertyType);
                 dt.Columns[property.Name].Caption = property.Name;
             }
-            
+
             foreach (var element in list)
             {
                 var row = dt.NewRow();
