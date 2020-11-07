@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoFixture;
@@ -35,19 +34,6 @@ namespace Excel.Helper.Tests
                     .ToList();
                 await ExcelBuilder.BuildExcelFile(list, null);
             });
-        }
-        
-        [Fact]
-        public async Task ExcelFileShouldNotBeNullAndEmpty()
-        {
-            var people = new List<Person>
-            {
-                new Person {Id = 1, Name = "Dogac"}
-            };
-            var excel = await ExcelBuilder.BuildExcelFile(people);
-            
-            Assert.NotNull(excel);
-            Assert.NotEmpty(excel);
         }
     }
 }
