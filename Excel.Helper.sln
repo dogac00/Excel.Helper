@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excel.Helper", "src\Excel.Helper.csproj", "{389D0751-A847-4BD1-B333-436079FF4E89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excel.Helper.Tests", "tests\Excel.Helper.Tests\Excel.Helper.Tests.csproj", "{3A50D8C3-D0F2-4801-8C00-73D8B7D2AEFA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excel.Helper.Tests", "tests\Excel.Helper.Tests.csproj", "{A326C28A-8A35-4D89-A4AF-BE97F47F5085}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +14,9 @@ Global
 		{389D0751-A847-4BD1-B333-436079FF4E89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{389D0751-A847-4BD1-B333-436079FF4E89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{389D0751-A847-4BD1-B333-436079FF4E89}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3A50D8C3-D0F2-4801-8C00-73D8B7D2AEFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3A50D8C3-D0F2-4801-8C00-73D8B7D2AEFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3A50D8C3-D0F2-4801-8C00-73D8B7D2AEFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3A50D8C3-D0F2-4801-8C00-73D8B7D2AEFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A326C28A-8A35-4D89-A4AF-BE97F47F5085}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A326C28A-8A35-4D89-A4AF-BE97F47F5085}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A326C28A-8A35-4D89-A4AF-BE97F47F5085}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A326C28A-8A35-4D89-A4AF-BE97F47F5085}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
