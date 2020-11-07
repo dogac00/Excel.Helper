@@ -61,5 +61,22 @@ namespace Excel.Helper.Tests
 
             await File.WriteAllBytesAsync(path, file);
         }
+        
+        [Fact]
+        public async Task ShouldBuildExcel_WithDoubleList()
+        {
+            var textList = new List<double>
+            {
+                3.4345,
+                1.3446889,
+                45894.435
+            };
+
+            var file = await ExcelBuilder.BuildExcelFile(textList);
+            
+            var path = GetExcelsFolderPath("DoubleExcel.xlsx");
+
+            await File.WriteAllBytesAsync(path, file);
+        }
     }
 }
