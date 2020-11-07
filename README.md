@@ -23,6 +23,12 @@ class Person
   public string Name { get; set; }
 }
 
+List<Person> people = new List<Person> 
+{
+  new Person { Id = 675542, Name = "John" },
+  new Person { Id = 598691, Name = "Doe" }
+};
+
 byte[] excelBytes = await ExcelBuilder.BuildExcelFile(people);
 
 File.WriteAllBytesAsync("MY_EXCEL_FILE.xlsx", excelBytes);
