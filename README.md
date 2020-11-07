@@ -3,7 +3,7 @@ Repository for creating excel files from C# lists, and reading excel files to C#
 
 # Usage
 Read from Excel File to a C# list
-```
+``` cs
 class Person 
 {
   public int Id { get; set; }
@@ -16,7 +16,7 @@ List<Person> people = await ExcelReader.ReadExcelFile<Person>("EXCEL_FILE_NAME.x
 ```
 
 Write to a Excel File from a C# list
-```
+``` cs
 class Person 
 {
   public int Id { get; set; }
@@ -24,9 +24,6 @@ class Person
 }
 
 byte[] excelBytes = await ExcelBuilder.BuildExcelFile(people);
-
-// Returns a byte array, you can use that to
-// write to a file or send over the network etc.
 
 File.WriteAllBytesAsync("MY_EXCEL_FILE.xlsx", excelBytes);
 ```
