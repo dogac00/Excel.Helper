@@ -19,7 +19,7 @@ namespace Excel.Helper.Tests
             {
                 new Person {Id = 5, Name = "ABC"},
                 new Person {Id = 77, Name = "DEF"},
-                new Person {Id = 99, Name = "GHJ"}
+                new Person {Id = 99, Name = null}
             };
 
             var file = await ExcelBuilder.BuildExcelFile(people);

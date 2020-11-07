@@ -53,10 +53,19 @@ namespace Excel.Helper
 
                     for (var i = 0; i < properties.Length; i++)
                     {
-                        var cell = row.Cell(i + 1);
-                        var property = properties[i];
-                        var castedValue = Convert.ChangeType(cell.Value, property.PropertyType);
-                        property.SetValue(obj, castedValue);
+                        try
+                        {
+                            var cell = row.Cell(i + 1);
+                            var property = properties[i];
+                            var castedValue = Convert.ChangeType(cell.Value, property.PropertyType);
+                            property.SetValue(obj, castedValue);
+                        }
+                        catch (FormatException)
+                        {
+                            throw new InvalidExcelException($"Cell value in Row : {row.RowNumber()}, Column : { i + 1 }, " +
+                                                            $"Value : { row.Cell(i + 1).Value } could not be converted to " +
+                                                            $"the type : { properties[i].PropertyType.Name }");
+                        }
                     }
 
                     objList.Add(obj);
