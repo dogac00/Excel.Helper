@@ -18,10 +18,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Excels" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\src\Excel.Helper.csproj" />
     </ItemGroup>
 
