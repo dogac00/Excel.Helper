@@ -40,9 +40,18 @@ namespace Excel.Helper
             {
                 foreach (var row in rows)
                 {
-                    var cell = row.Cell(1);
-                    var obj = cell.GetValue<T>();
-                    objList.Add(obj);
+                    try
+                    {
+                        var cell = row.Cell(1);
+                        var obj = cell.GetValue<T>();
+                        objList.Add(obj);
+                    }
+                    catch (FormatException)
+                    {
+                        throw new InvalidExcelException($"Cell value in Row : {row.RowNumber()}, Column : { 1 }, " +
+                                                        $"Value : { row.Cell(1).Value } could not be converted to " +
+                                                        $"the type : { typeof(T).Name }");
+                    }
                 }
             }
             else
