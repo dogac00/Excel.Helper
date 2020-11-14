@@ -81,7 +81,7 @@ namespace Excel.Helper
                             {
                                 Row = row.RowNumber(),
                                 Column = i + 1,
-                                Value = row.Cell(i + 1),
+                                Value = row.Cell(i + 1).Value,
                                 ConversionType = properties[i].PropertyType,
                                 Exception = e
                             });
