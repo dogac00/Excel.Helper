@@ -13,7 +13,7 @@ namespace Excel.Helper.Tests
         }
 
         [Fact]
-        public async Task ReadExcel_ShouldWorkWithEmptyCells()
+        public async Task ReadExcelFile_WhenEmptyStringCellsSupplied_ShouldReadCellsAsEmptyString()
         {
             var file = await ExcelBuilder.BuildExcelFile(new List<Person>
             {
@@ -30,7 +30,7 @@ namespace Excel.Helper.Tests
         }
 
         [Fact]
-        public async Task ReadExcel_ShouldWorkWithInvalidCells()
+        public async Task ReadExcelFile_WhenValuesSupplied_ShouldRoundValuesOrConvertToStringRepresentation()
         {
             var invalidPeople = new List<InvalidPerson>()
             {
@@ -49,7 +49,7 @@ namespace Excel.Helper.Tests
         }
 
         [Fact]
-        public async Task ReadExcel_ShouldThrowWhenCannotConvert()
+        public async Task ReadExcelFile_WhenInvalidPeopleExcelFileIsGiven_ShouldThrowInvalidExcelException()
         {
             var invalidPeople = new List<InvalidPerson2>
             {
@@ -65,7 +65,7 @@ namespace Excel.Helper.Tests
         }
 
         [Fact]
-        public async Task ReadExcel_InvalidDoubleExcel_ShouldConvert()
+        public async Task ReadExcelFile_WhenInvalidDoubleExcelFileIsGiven_ShouldThrowInvalidExcelException()
         {
             var file = GetExcelsFolderPath("InvalidDoubleExcel.xlsx");
 
@@ -74,6 +74,13 @@ namespace Excel.Helper.Tests
                 await ExcelReader.ReadExcelFile<double>(file);
             });
         }
+    }
+
+    public class PersonWithDoubleColumn
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public double Test { get; set; }
     }
 
     public class InvalidPerson
