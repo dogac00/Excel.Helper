@@ -74,24 +74,18 @@ namespace Excel.Helper.Tests
                 await ExcelReader.ReadExcelFile<double>(file);
             });
         }
-    }
+        
+        [Fact]
+        public async Task ReadExcelFile_WhenPeopleExcelWithEmptyDoubleCell_ShouldThrowInvalidExcelException()
+        {
+            var file = GetExcelsFolderPath("PeopleExcelWithEmptyDoubleCell.xlsx");
 
-    public class PersonWithDoubleColumn
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public double Test { get; set; }
-    }
-
-    public class InvalidPerson
-    {
-        public double Id { get; set; }
-        public int Name { get; set; }
-    }
-
-    public class InvalidPerson2
-    {
-        public string Id { get; set; }
-        public int Name { get; set; }
+            var exception = await Assert.ThrowsAsync<InvalidExcelException>(async () =>
+            {
+                await ExcelReader.ReadExcelFile<PersonWithDoubleColumn>(file);
+            });
+            
+            Assert.Single(exception.InvalidColumns);
+        }
     }
 }
