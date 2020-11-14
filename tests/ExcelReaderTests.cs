@@ -3,16 +3,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Excel.Helper.Tests.Types;
 using Xunit;
+using static Excel.Helper.Tests.ExcelFilesUtil;
 
 namespace Excel.Helper.Tests
 {
     public class ExcelReaderTests
     {
-        private string GetExcelsFolderPath(string fileName)
-        {
-            return $"../../../Excels/{fileName}";
-        }
-
         [Fact]
         public async Task ReadExcelFile_WhenEmptyStringCellsSupplied_ShouldReadCellsAsEmptyString()
         {
@@ -33,10 +29,10 @@ namespace Excel.Helper.Tests
         [Fact]
         public async Task ReadExcelFile_WhenValuesSupplied_ShouldRoundValuesOrConvertToStringRepresentation()
         {
-            var invalidPeople = new List<InvalidPerson>()
+            var invalidPeople = new List<PersonDoubleIdIntName>()
             {
-                new InvalidPerson() {Id = 12.5656, Name = 234},
-                new InvalidPerson() {Id = 15.134368, Name = 906}
+                new PersonDoubleIdIntName() {Id = 12.5656, Name = 234},
+                new PersonDoubleIdIntName() {Id = 15.134368, Name = 906}
             };
             var file = await ExcelBuilder.BuildExcelFile(invalidPeople);
 
@@ -52,10 +48,10 @@ namespace Excel.Helper.Tests
         [Fact]
         public async Task ReadExcelFile_WhenInvalidPeopleExcelFileIsGiven_ShouldThrowInvalidExcelException()
         {
-            var invalidPeople = new List<InvalidPerson2>
+            var invalidPeople = new List<PersonStringIdIntName>
             {
-                new InvalidPerson2() {Id = "12.5656", Name = 234},
-                new InvalidPerson2() {Id = "15.134368", Name = 906}
+                new PersonStringIdIntName() {Id = "12.5656", Name = 234},
+                new PersonStringIdIntName() {Id = "15.134368", Name = 906}
             };
             var file = await ExcelBuilder.BuildExcelFile(invalidPeople);
 
@@ -83,7 +79,7 @@ namespace Excel.Helper.Tests
 
             var exception = await Assert.ThrowsAsync<InvalidExcelException>(async () =>
             {
-                await ExcelReader.ReadExcelFile<PersonWithDoubleColumn>(file);
+                await ExcelReader.ReadExcelFile<PersonIntIdStringNameDoubleTest>(file);
             });
             
             Assert.Single(exception.InvalidColumns);

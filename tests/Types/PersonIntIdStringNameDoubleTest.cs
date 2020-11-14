@@ -1,6 +1,6 @@
-namespace Excel.Helper.Tests
+namespace Excel.Helper.Tests.Types
 {
-    public class PersonWithDoubleColumn
+    public class PersonIntIdStringNameDoubleTest
     {
         public int Id { get; set; }
         public string Name { get; set; }

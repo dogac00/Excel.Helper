@@ -3,16 +3,12 @@ using System.IO;
 using System.Threading.Tasks;
 using Excel.Helper.Tests.Types;
 using Xunit;
+using static Excel.Helper.Tests.ExcelFilesUtil;
 
 namespace Excel.Helper.Tests
 {
     public class ExcelBuilderTests
     {
-        private string GetExcelsFolderPath(string fileName)
-        {
-            return $"../../../Excels/{fileName}";
-        }
-        
         [Fact]
         public async Task BuildExcelFile_WhenValidPeopleListIsGiven_ShouldBuildExcelFile()
         {
@@ -25,10 +21,10 @@ namespace Excel.Helper.Tests
 
             var file = await ExcelBuilder.BuildExcelFile(people);
             var path = GetExcelsFolderPath("PeopleExcel.xlsx");
-            
+
             await File.WriteAllBytesAsync(path, file);
         }
-        
+
         [Fact]
         public async Task BuildExcelFile_WhenValidStringListIsGiven_ShouldBuildExcelFile()
         {
@@ -40,12 +36,12 @@ namespace Excel.Helper.Tests
             };
 
             var file = await ExcelBuilder.BuildExcelFile(textList);
-            
+
             var path = GetExcelsFolderPath("StringsExcel.xlsx");
 
             await File.WriteAllBytesAsync(path, file);
         }
-        
+
         [Fact]
         public async Task BuildExcelFile_WhenDynamicListIsGiven_ShouldBuildExcelFile()
         {
@@ -57,12 +53,12 @@ namespace Excel.Helper.Tests
             };
 
             var file = await ExcelBuilder.BuildExcelFile(textList);
-            
+
             var path = GetExcelsFolderPath("DynamicExcel.xlsx");
 
             await File.WriteAllBytesAsync(path, file);
         }
-        
+
         [Fact]
         public async Task BuildExcelFile_WhenDoubleListIsGiven_ShouldBuildExcelFile()
         {
@@ -74,7 +70,7 @@ namespace Excel.Helper.Tests
             };
 
             var file = await ExcelBuilder.BuildExcelFile(textList);
-            
+
             var path = GetExcelsFolderPath("DoubleExcel.xlsx");
 
             await File.WriteAllBytesAsync(path, file);

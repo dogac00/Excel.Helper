@@ -1,8 +1,8 @@
 namespace Excel.Helper.Tests.Types
 {
-    public class InvalidPerson2
+    public class PersonDoubleIdIntName
     {
-        public string Id { get; set; }
+        public double Id { get; set; }
         public int Name { get; set; }
     }
 }
