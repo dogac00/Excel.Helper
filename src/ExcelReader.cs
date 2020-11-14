@@ -27,15 +27,13 @@ namespace Excel.Helper
         {
             using var workbook = new XLWorkbook(stream);
             var worksheet = workbook.Worksheets.First();
-
-            var properties = typeof(T)
-                .GetProperties();
-
-            var objList = new List<T>();
             var rows = hasHeader
                 ? worksheet.Rows().Skip(1)
                 : worksheet.Rows();
-
+            
+            var objList = new List<T>();
+            var invalidColumns = new List<InvalidColumn>();
+            
             if (typeof(T).IsPrimitive || typeof(T) == typeof(string))
             {
                 foreach (var row in rows)
@@ -46,16 +44,24 @@ namespace Excel.Helper
                         var obj = cell.GetValue<T>();
                         objList.Add(obj);
                     }
-                    catch (FormatException)
+                    catch (FormatException e)
                     {
-                        throw new InvalidExcelException($"Cell value in Row : {row.RowNumber()}, Column : { 1 }, " +
-                                                        $"Value : { row.Cell(1).Value } could not be converted to " +
-                                                        $"the type : { typeof(T).Name }");
+                        invalidColumns.Add(new InvalidColumn()
+                        {
+                            Column = 1,
+                            Row = row.RowNumber(),
+                            Exception = e,
+                            Value = row.Cell(1).Value,
+                            ConversionType = typeof(T)
+                        });
                     }
                 }
             }
             else
             {
+                var properties = typeof(T)
+                    .GetProperties();
+                
                 foreach (var row in rows)
                 {
                     var obj = Activator.CreateInstance<T>();
@@ -69,16 +75,26 @@ namespace Excel.Helper
                             var castedValue = Convert.ChangeType(cell.Value, property.PropertyType);
                             property.SetValue(obj, castedValue);
                         }
-                        catch (FormatException)
+                        catch (FormatException e)
                         {
-                            throw new InvalidExcelException($"Cell value in Row : {row.RowNumber()}, Column : { i + 1 }, " +
-                                                            $"Value : { row.Cell(i + 1).Value } could not be converted to " +
-                                                            $"the type : { properties[i].PropertyType.Name }");
+                            invalidColumns.Add(new InvalidColumn()
+                            {
+                                Row = row.RowNumber(),
+                                Column = i + 1,
+                                Value = row.Cell(i + 1),
+                                ConversionType = properties[i].PropertyType,
+                                Exception = e
+                            });
                         }
                     }
 
                     objList.Add(obj);
                 }
+            }
+
+            if (invalidColumns.Any())
+            {
+                throw new InvalidExcelException(invalidColumns);
             }
 
             return objList;
