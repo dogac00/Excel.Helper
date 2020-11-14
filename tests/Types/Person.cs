@@ -1,8 +1,8 @@
 using System;
 
-namespace Excel.Helper.Tests
+namespace Excel.Helper.Tests.Types
 {
-    class Person : IEquatable<Person>
+    public class Person : IEquatable<Person>
     {
         public int Id { get; set; }
         public string Name { get; set; }

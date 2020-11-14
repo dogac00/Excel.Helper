@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Excel.Helper.Tests.Types;
 using Xunit;
 
 namespace Excel.Helper.Tests

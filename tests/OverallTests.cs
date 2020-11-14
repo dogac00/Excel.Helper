@@ -2,6 +2,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoFixture;
+using Excel.Helper.Tests.Types;
 using Xunit;
 
 namespace Excel.Helper.Tests
@@ -55,7 +56,7 @@ namespace Excel.Helper.Tests
                 .ToList();
             var excel = await ExcelBuilder.BuildExcelFile(people);
             
-            var tempFilePath = "tempFile.xlsx";
+            var tempFilePath = "tempFile2.xlsx";
             
             await File.WriteAllBytesAsync(tempFilePath, excel);
 
