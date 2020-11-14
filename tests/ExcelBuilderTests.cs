@@ -13,7 +13,7 @@ namespace Excel.Helper.Tests
         }
         
         [Fact]
-        public async Task ShouldBuildExcel_WithPeopleList()
+        public async Task BuildExcelFile_WhenValidPeopleListIsGiven_ShouldBuildExcelFile()
         {
             var people = new List<Person>
             {
@@ -29,7 +29,7 @@ namespace Excel.Helper.Tests
         }
         
         [Fact]
-        public async Task ShouldBuildExcel_WithStringList()
+        public async Task BuildExcelFile_WhenValidStringListIsGiven_ShouldBuildExcelFile()
         {
             var textList = new List<string>
             {
@@ -46,7 +46,7 @@ namespace Excel.Helper.Tests
         }
         
         [Fact]
-        public async Task ShouldBuildExcel_WithDynamicList()
+        public async Task BuildExcelFile_WhenDynamicListIsGiven_ShouldBuildExcelFile()
         {
             var textList = new List<dynamic>
             {
@@ -63,7 +63,7 @@ namespace Excel.Helper.Tests
         }
         
         [Fact]
-        public async Task ShouldBuildExcel_WithDoubleList()
+        public async Task BuildExcelFile_WhenDoubleListIsGiven_ShouldBuildExcelFile()
         {
             var textList = new List<double>
             {
