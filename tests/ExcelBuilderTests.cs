@@ -20,7 +20,7 @@ namespace Excel.Helper.Tests
             };
 
             var file = await ExcelBuilder.BuildExcelFile(people);
-            var path = GetExcelsFolderPath("PeopleExcel.xlsx");
+            var path = GetExcelFilePath("PeopleExcel.xlsx");
 
             await File.WriteAllBytesAsync(path, file);
         }
@@ -37,7 +37,7 @@ namespace Excel.Helper.Tests
 
             var file = await ExcelBuilder.BuildExcelFile(textList);
 
-            var path = GetExcelsFolderPath("StringsExcel.xlsx");
+            var path = GetExcelFilePath("StringsExcel.xlsx");
 
             await File.WriteAllBytesAsync(path, file);
         }
@@ -54,7 +54,7 @@ namespace Excel.Helper.Tests
 
             var file = await ExcelBuilder.BuildExcelFile(textList);
 
-            var path = GetExcelsFolderPath("DynamicExcel.xlsx");
+            var path = GetExcelFilePath("DynamicExcel.xlsx");
 
             await File.WriteAllBytesAsync(path, file);
         }
@@ -71,7 +71,7 @@ namespace Excel.Helper.Tests
 
             var file = await ExcelBuilder.BuildExcelFile(textList);
 
-            var path = GetExcelsFolderPath("DoubleExcel.xlsx");
+            var path = GetExcelFilePath("DoubleExcel.xlsx");
 
             await File.WriteAllBytesAsync(path, file);
         }

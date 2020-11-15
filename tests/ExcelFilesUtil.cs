@@ -2,7 +2,7 @@ namespace Excel.Helper.Tests
 {
     public class ExcelFilesUtil
     {
-        public static string GetExcelsFolderPath(string fileName)
+        public static string GetExcelFilePath(string fileName)
         {
             return $"../../../Excels/{fileName}";
         }
