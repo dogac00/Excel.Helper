@@ -28,13 +28,15 @@ namespace Excel.Helper
             using var workbook = new XLWorkbook(stream);
             var worksheet = workbook.Worksheets.First();
             var rows = hasHeader
-                ? worksheet.Rows().Skip(1)
-                : worksheet.Rows();
+                ? worksheet.RowsUsed().Skip(1)
+                : worksheet.RowsUsed();
             
             var objList = new List<T>();
             var invalidColumns = new List<InvalidColumn>();
             
-            if (typeof(T).IsPrimitive || typeof(T) == typeof(string))
+            if (typeof(T).IsPrimitive || 
+                typeof(T) == typeof(string) ||
+                typeof(T) == typeof(object))
             {
                 foreach (var row in rows)
                 {
@@ -46,7 +48,7 @@ namespace Excel.Helper
                     }
                     catch (FormatException e)
                     {
-                        invalidColumns.Add(new InvalidColumn()
+                        invalidColumns.Add(new InvalidColumn
                         {
                             Column = 1,
                             Row = row.RowNumber(),
